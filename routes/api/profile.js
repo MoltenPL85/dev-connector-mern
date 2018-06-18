@@ -44,7 +44,7 @@ router.get('/all', (req, res) => {
     .then(profiles => {
       if (!profiles) {
         errors.noprofile = 'There are no profiles';
-        res.status(404).json(errors);
+        return res.status(404).json(errors);
       }
 
       res.json(profiles);
@@ -68,9 +68,7 @@ router.get('/handle/:handle', (req, res) => {
 
       res.json(profile);
     })
-    .catch(err =>
-      res.status(404).json({ profile: 'There is no profile for this user' }),
-    );
+    .catch(err => res.status(404).json(err));
 });
 
 // @route   GET api/profile/user/:user_id
@@ -89,7 +87,9 @@ router.get('/user/:user_id', (req, res) => {
 
       res.json(profile);
     })
-    .catch(err => res.status(404).json(err));
+    .catch(err =>
+      res.status(404).json({ profile: 'There is no profile for this user' }),
+    );
 });
 
 // @route   POST api/profile
