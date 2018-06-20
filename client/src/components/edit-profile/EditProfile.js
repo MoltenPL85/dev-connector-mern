@@ -28,21 +28,16 @@ class CreateProfile extends Component {
     errors: {},
   };
 
-  static getDerivedStateFromProps(nextProps, prevState) {
-    if (prevState.errors !== nextProps.errors) {
-      return {
-        errors: nextProps.errors,
-      };
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.errors) {
+      this.setState({ errors: nextProps.errors });
     }
-    return null;
-  }
 
-  componentDidUpdate(prevState) {
-    if (prevState.profile.profile !== this.props.profile.profile) {
-      const profile = this.props.profile.profile;
+    if (nextProps.profile.profile) {
+      const profile = nextProps.profile.profile;
 
-      // Bring skills array back to csv
-      const skillsCSV = profile.skills.join(', ');
+      // Bring skills array back to CSV
+      const skillsCSV = profile.skills.join(',');
 
       // If profile field doesnt exist, make empty string
       profile.company = !isEmpty(profile.company) ? profile.company : '';

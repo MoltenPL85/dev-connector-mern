@@ -10,13 +10,10 @@ class PostForm extends Component {
     errors: {},
   };
 
-  static getDerivedStateFromProps(nextProps, prevState) {
-    if (prevState.errors !== nextProps.errors) {
-      return {
-        errors: nextProps.errors,
-      };
+  componentWillReceiveProps(newProps) {
+    if (newProps.errors) {
+      this.setState({ errors: newProps.errors });
     }
-    return null;
   }
 
   onChange = e => {

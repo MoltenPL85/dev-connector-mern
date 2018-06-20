@@ -10,8 +10,8 @@ import Spinner from '../common/Spinner';
 import { getProfileByHandle } from '../../actions/profileActions';
 
 class Profile extends Component {
-  componentDidUpdate(prevProps) {
-    if (this.props.profile.profile === null && prevProps.profile.loading) {
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.profile.profile === null && this.props.profile.loading) {
       this.props.history.push('/not-found');
     }
   }

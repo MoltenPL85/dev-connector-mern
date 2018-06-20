@@ -32,22 +32,17 @@ class Login extends Component {
     }
   }
 
-  static getDerivedStateFromProps(nextProps, prevState) {
+  componentWillReceiveProps(nextProps) {
     if (nextProps.auth.isAuthenticated) {
-      nextProps.history.push('/dashboard');
+      this.props.history.push('/dashboard');
     }
-
-    if (prevState.errors !== nextProps.errors) {
-      return {
-        errors: nextProps.errors,
-      };
+    if (nextProps.errors) {
+      this.setState({ errors: nextProps.errors });
     }
-    return null;
   }
 
   render() {
     const { errors } = this.state;
-
     return (
       <div className="login">
         <div className="container">

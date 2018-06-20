@@ -19,13 +19,10 @@ class AddExperience extends Component {
     disabled: false,
   };
 
-  static getDerivedStateFromProps(nextProps, prevState) {
-    if (prevState.errors !== nextProps.errors) {
-      return {
-        errors: nextProps.errors,
-      };
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.errors) {
+      this.setState({ errors: nextProps.errors });
     }
-    return null;
   }
 
   onSubmit = e => {
