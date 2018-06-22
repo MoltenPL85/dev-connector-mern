@@ -32,7 +32,7 @@ class ProfileHeader extends Component {
                   <a
                     className="text-white p-2"
                     href={profile.website}
-                    tarteg="_blank"
+                    target="_blank"
                   >
                     <i className="fas fa-globe fa-2x" />
                   </a>
@@ -41,7 +41,7 @@ class ProfileHeader extends Component {
                   <a
                     className="text-white p-2"
                     href={profile.social.twitter}
-                    tarteg="_blank"
+                    target="_blank"
                   >
                     <i className="fab fa-twitter fa-2x" />
                   </a>
@@ -50,7 +50,7 @@ class ProfileHeader extends Component {
                   <a
                     className="text-white p-2"
                     href={profile.social.facebook}
-                    tarteg="_blank"
+                    target="_blank"
                   >
                     <i className="fab fa-facebook fa-2x" />
                   </a>
@@ -59,7 +59,7 @@ class ProfileHeader extends Component {
                   <a
                     className="text-white p-2"
                     href={profile.social.linkedin}
-                    tarteg="_blank"
+                    target="_blank"
                   >
                     <i className="fab fa-linkedin fa-2x" />
                   </a>
@@ -68,7 +68,7 @@ class ProfileHeader extends Component {
                   <a
                     className="text-white p-2"
                     href={profile.social.youtube}
-                    tarteg="_blank"
+                    target="_blank"
                   >
                     <i className="fab fa-youtube fa-2x" />
                   </a>
@@ -77,7 +77,7 @@ class ProfileHeader extends Component {
                   <a
                     className="text-white p-2"
                     href={profile.social.instagram}
-                    tarteg="_blank"
+                    target="_blank"
                   >
                     <i className="fab fa-instagram fa-2x" />
                   </a>

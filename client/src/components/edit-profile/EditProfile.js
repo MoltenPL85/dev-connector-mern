@@ -26,11 +26,12 @@ class CreateProfile extends Component {
     youtube: '',
     instagram: '',
     errors: {},
+    submitted: false,
   };
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.errors) {
-      this.setState({ errors: nextProps.errors });
+      this.setState({ errors: nextProps.errors, submitted: false });
     }
 
     if (nextProps.profile.profile) {
@@ -94,8 +95,12 @@ class CreateProfile extends Component {
   onSubmit = e => {
     e.preventDefault();
 
+    this.setState({ submitted: true });
+
+    const { profile } = this.props.profile;
+
     const profileData = {
-      handle: this.state.handle,
+      handle: profile.handle,
       company: this.state.company,
       website: this.state.website,
       location: this.state.location,
@@ -189,14 +194,17 @@ class CreateProfile extends Component {
               <h1 className="display-4 text-center">Edit Profile</h1>
               <small className="d-block pb-3">* = required fields</small>
               <form onSubmit={this.onSubmit}>
-                <TextFieldGroup
-                  placeholder="* Profile Handle"
-                  name="handle"
-                  value={this.state.handle}
-                  onChange={this.onChange}
-                  error={errors.handle}
-                  info="A unique handle for your profile URL, Your full name, company name, nickname"
-                />
+                {
+                  <TextFieldGroup
+                    placeholder="* Profile Handle"
+                    name="handle"
+                    value={this.state.handle}
+                    onChange={this.onChange}
+                    error={errors.handle}
+                    disabled={`!isEmpty(this.state.handle)`}
+                    info="A unique handle for your profile URL, Your full name, company name, nickname. YOU CANNOT CHANGE THIS FIELD!"
+                  />
+                }
                 <SelectListGroup
                   placeholder="Status"
                   name="status"
@@ -271,7 +279,8 @@ class CreateProfile extends Component {
                 {socialInputs}
                 <input
                   type="submit"
-                  value="Submit"
+                  value={this.state.submitted ? 'Submitted' : 'Submit'}
+                  disabled={this.state.submitted}
                   className="btn btn-info btn-block mt-4"
                 />
               </form>

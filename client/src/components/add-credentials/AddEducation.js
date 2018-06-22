@@ -17,16 +17,19 @@ class AddEducation extends Component {
     description: '',
     errors: {},
     disabled: false,
+    submitted: false,
   };
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.errors) {
-      this.setState({ errors: nextProps.errors });
+      this.setState({ errors: nextProps.errors, submitted: false });
     }
   }
 
   onSubmit = e => {
     e.preventDefault();
+
+    this.setState({ submitted: true });
 
     const eduData = {
       school: this.state.school,
@@ -130,7 +133,8 @@ class AddEducation extends Component {
                 />
                 <input
                   type="submit"
-                  value="Submit"
+                  value={this.state.submitted ? 'Submitted' : 'Submit'}
+                  disabled={this.state.submitted}
                   className="btn btn-info btn-block mt-4"
                 />
               </form>

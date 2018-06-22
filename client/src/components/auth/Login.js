@@ -9,6 +9,7 @@ class Login extends Component {
     email: '',
     password: '',
     errors: {},
+    submitted: false,
   };
 
   onChange = e => {
@@ -17,6 +18,8 @@ class Login extends Component {
 
   onSubmit = e => {
     e.preventDefault();
+
+    this.setState({ submitted: true });
 
     const userData = {
       email: this.state.email,
@@ -37,7 +40,7 @@ class Login extends Component {
       this.props.history.push('/dashboard');
     }
     if (nextProps.errors) {
-      this.setState({ errors: nextProps.errors });
+      this.setState({ errors: nextProps.errors, submitted: false });
     }
   }
 
@@ -69,7 +72,12 @@ class Login extends Component {
                   onChange={this.onChange}
                   error={errors.password}
                 />
-                <input type="submit" className="btn btn-info btn-block mt-4" />
+                <input
+                  value={this.state.submitted ? 'Submitted' : 'Submit'}
+                  type="submit"
+                  className="btn btn-info btn-block mt-4"
+                  disabled={this.state.submitted}
+                />
               </form>
             </div>
           </div>

@@ -25,11 +25,12 @@ class CreateProfile extends Component {
     youtube: '',
     instagram: '',
     errors: {},
+    submitted: false,
   };
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.errors) {
-      this.setState({ errors: nextProps.errors });
+      this.setState({ errors: nextProps.errors, submitted: false });
     }
   }
 
@@ -39,6 +40,8 @@ class CreateProfile extends Component {
 
   onSubmit = e => {
     e.preventDefault();
+
+    this.setState({ submitted: true });
 
     const profileData = {
       handle: this.state.handle,
@@ -141,7 +144,7 @@ class CreateProfile extends Component {
                   value={this.state.handle}
                   onChange={this.onChange}
                   error={errors.handle}
-                  info="A unique handle for your profile URL, Your full name, company name, nickname"
+                  info="A unique handle for your profile URL, Your full name, company name, nickname. YOU CANNOT CHANGE THIS FIELD LATER!"
                 />
                 <SelectListGroup
                   placeholder="Status"
@@ -217,8 +220,9 @@ class CreateProfile extends Component {
                 {socialInputs}
                 <input
                   type="submit"
-                  value="Submit"
+                  value={this.state.submitted ? 'Submitted' : 'Submit'}
                   className="btn btn-info btn-block mt-4"
+                  disabled={this.state.submitted}
                 />
               </form>
             </div>

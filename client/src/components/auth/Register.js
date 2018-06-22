@@ -12,6 +12,7 @@ class Register extends Component {
     password: '',
     password2: '',
     errors: {},
+    submitted: false,
   };
 
   componentDidMount() {
@@ -22,7 +23,7 @@ class Register extends Component {
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.errors) {
-      this.setState({ errors: nextProps.errors });
+      this.setState({ errors: nextProps.errors, submitted: false });
     }
   }
 
@@ -32,6 +33,8 @@ class Register extends Component {
 
   onSubmit = e => {
     e.preventDefault();
+
+    this.setState({ submitted: true });
 
     const newUser = {
       name: this.state.name,
@@ -88,7 +91,12 @@ class Register extends Component {
                   onChange={this.onChange}
                   error={errors.password2}
                 />
-                <input type="submit" className="btn btn-info btn-block mt-4" />
+                <input
+                  disabled={this.state.submitted}
+                  type="submit"
+                  value={this.state.submitted ? 'Submitted' : 'Submit'}
+                  className="btn btn-info btn-block mt-4"
+                />
               </form>
             </div>
           </div>

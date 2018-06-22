@@ -7,7 +7,11 @@ import ProfileAbout from './ProfileAbout';
 import ProfileCreds from './ProfileCreds';
 import ProfileGithub from './ProfileGithub';
 import Spinner from '../common/Spinner';
-import { getProfileByHandle } from '../../actions/profileActions';
+import {
+  getProfileByHandle,
+  getProfileByUserId,
+} from '../../actions/profileActions';
+import isEmpty from '../../validation/is-empty';
 
 class Profile extends Component {
   componentWillReceiveProps(nextProps) {
@@ -20,13 +24,16 @@ class Profile extends Component {
     if (this.props.match.params.handle) {
       this.props.getProfileByHandle(this.props.match.params.handle);
     }
+    if (this.props.match.params.userId) {
+      this.props.getProfileByUserId(this.props.match.params.userId);
+    }
   }
 
   render() {
     const { profile, loading } = this.props.profile;
     let profileContent;
 
-    if (profile === null || loading) {
+    if (isEmpty(profile) || loading) {
       profileContent = <Spinner />;
     } else {
       profileContent = (
@@ -66,6 +73,7 @@ class Profile extends Component {
 
 Profile.propTypes = {
   getProfileByHandle: PropTypes.func.isRequired,
+  getProfileByUserId: PropTypes.func.isRequired,
   profile: PropTypes.object.isRequired,
 };
 
@@ -75,5 +83,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { getProfileByHandle },
+  { getProfileByHandle, getProfileByUserId },
 )(Profile);
