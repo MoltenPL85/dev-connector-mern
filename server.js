@@ -2,6 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const passport = require('passport');
+const compression = require('compression');
 const path = require('path');
 
 const users = require('./routes/api/users');
@@ -28,6 +29,9 @@ app.use(passport.initialize());
 
 // Passport Config
 require('./config/passport')(passport);
+
+// Compression middleware
+app.use(compression());
 
 // Use Routes
 app.use('/api/users', users);
